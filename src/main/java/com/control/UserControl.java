@@ -29,7 +29,7 @@ public class UserControl {
     public ResponseEntity<String> getStreetAddress(){
         System.out.println("mark 01");
         User user = userService.getOne();
-        System.out.println("mark 02: user = " + user);
+        System.out.println("mark 02:");
         List<Address> addresses = new ArrayList<>(user.getAddresses());
         System.out.println("mark 03");
         Address address = addresses.get(0);

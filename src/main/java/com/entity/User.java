@@ -46,6 +46,7 @@ public class User {
             joinColumns = @JoinColumn(name = "user_fk", referencedColumnName = "user_id"),
             inverseJoinColumns = @JoinColumn(name = "address_fk", referencedColumnName = "address_id"))
 //    @JsonIgnoreProperties("users")
+    @JsonManagedReference
     private Set<Address> addresses;
 
     @OneToOne(cascade = CascadeType.ALL)
