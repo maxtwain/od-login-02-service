@@ -1,0 +1,15 @@
+server:
+  port: 9092
+
+spring:
+  datasource:
+    url: jdbc:mariadb://database01.c4apmpqoggjv.us-east-2.rds.amazonaws.com:3306/od_login_01
+    username: root
+    password: password
+    driver-class-name: org.mariadb.jdbc.Driver
+
+  jpa:
+    database-platform: org.hibernate.dialect.MySQL8Dialect
+    show-sql: true
+    hibernate:
+      ddl-auto: create-drop
