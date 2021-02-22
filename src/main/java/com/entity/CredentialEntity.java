@@ -1,23 +1,22 @@
 package com.entity;
 
-import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.obj.Credential;
 import lombok.*;
 
 import javax.persistence.*;
 
 @Getter
 @Setter
-@ToString
 @Entity
 @NoArgsConstructor
 @AllArgsConstructor
 @Table(name = "credential")
-public class Credential {
+public class CredentialEntity {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     @Column(name = "credential_id")
     @Setter(AccessLevel.NONE)
-    private int credentialId;
+    private Integer credentialId;
 
     @Column(name = "username")
     private String username;
@@ -25,12 +24,12 @@ public class Credential {
     @Column(name = "password")
     private String password;
 
-    @OneToOne(mappedBy = "credential")
-    @JsonBackReference
-    private User user;
+    @OneToOne(mappedBy = "credentialEntity")
+    private UserEntity userEntity;
 
-    public Credential(String username, String password) {
-        this.username = username;
-        this.password = password;
+    public CredentialEntity(Credential credential){
+        credentialId = credential.getCredentialId();
+        username = credential.getUsername();
+        password = credential.getPassword();
     }
 }

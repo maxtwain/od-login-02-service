@@ -1,8 +1,8 @@
 package com.access;
 
-import com.entity.Credential;
+import com.entity.CredentialEntity;
 import org.springframework.data.jpa.repository.JpaRepository;
 
-public interface CredentialDao extends JpaRepository<Credential, Integer> {
+public interface CredentialDao extends JpaRepository<CredentialEntity, Integer> {
 
 }

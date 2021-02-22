@@ -1,8 +1,8 @@
 package com.access;
 
-import com.entity.Address;
+import com.entity.AddressEntity;
 import org.springframework.data.jpa.repository.JpaRepository;
 
-public interface AddressDao extends JpaRepository<Address, Integer> {
+public interface AddressDao extends JpaRepository<AddressEntity, Integer> {
 
 }

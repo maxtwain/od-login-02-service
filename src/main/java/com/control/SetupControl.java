@@ -1,9 +1,11 @@
 package com.control;
 
-import com.entity.Address;
-import com.entity.Credential;
-import com.entity.User;
-import com.entity.UserType;
+import com.obj.Address;
+import com.obj.Credential;
+import com.obj.User;
+import com.obj.UserType;
+import com.service.AddressService;
+import com.service.CredentialService;
 import com.service.UserService;
 import com.service.UserTypeService;
 import lombok.AllArgsConstructor;
@@ -15,14 +17,16 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import java.util.Collections;
-import java.util.Set;
+import java.util.List;
 
 @RestController
 @RequestMapping("setup")
 @AllArgsConstructor(onConstructor = @__(@Autowired))
 public class SetupControl {
-    public UserTypeService userTypeService;
+    public AddressService addressService;
+    public CredentialService credentialService;
     public UserService userService;
+    public UserTypeService userTypeService;
 
     @PostMapping
     public ResponseEntity<String> setup(){
@@ -45,11 +49,11 @@ public class SetupControl {
                 "Tracy", "95376", "CA");
         Address address5 = new Address("2579 Sherman Street",
                 "Hope", "67451", "KS");
-        Set<Address> addressSet1 = Collections.singleton(address1);
-        Set<Address> addressSet2 = Collections.singleton(address2);
-        Set<Address> addressSet3 = Collections.singleton(address3);
-        Set<Address> addressSet4 = Collections.singleton(address4);
-        Set<Address> addressSet5 = Collections.singleton(address5);
+        List<Address> addressSet1 = Collections.singletonList(address1);
+        List<Address> addressSet2 = Collections.singletonList(address2);
+        List<Address> addressSet3 = Collections.singletonList(address3);
+        List<Address> addressSet4 = Collections.singletonList(address4);
+        List<Address> addressSet5 = Collections.singletonList(address5);
         Credential credential1 = new Credential("ant", "apple");
         Credential credential2 = new Credential("boar", "bananna");
         Credential credential3 = new Credential("cat", "carot");
@@ -68,4 +72,35 @@ public class SetupControl {
 
         return new ResponseEntity<>(HttpStatus.OK);
     }
+    @PostMapping("address")
+    public ResponseEntity<String> setupAddress(){
+        Address address = new Address("4360 Capitol Avenue",
+                "New Castle", "47362", "IN");
+        addressService.save(address);
+        return new ResponseEntity<>(HttpStatus.OK);
+    }
+    @PostMapping("credential")
+    public ResponseEntity<String> setupCredential(){
+        Credential credential = new Credential("ferret", "fennel");
+        credentialService.save(credential);
+        return new ResponseEntity<>(HttpStatus.OK);
+    }
+    @PostMapping("user")
+    public ResponseEntity<String> setupUser(){
+        Address address = new Address("538 Stratford Drive",
+                "New Castle", "96814", "HI");
+        List<Address> addresses = Collections.singletonList(address);
+        Credential credential = new Credential("gorilla", "grape");
+        UserType userType = new UserType("lifter");
+        User user = new User("Gordon", "Fisher", "wgomicmu@gmail.com", "8083860701", userType, addresses, credential);
+        userService.save(user);
+        return new ResponseEntity<>(HttpStatus.OK);
+    }
+    @PostMapping("usertype")
+    public ResponseEntity<String> setupUserType(){
+        UserType userType = new UserType("smithy");
+        userTypeService.save(userType);
+        return new ResponseEntity<>(HttpStatus.OK);
+    }
+
 }

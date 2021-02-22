@@ -1,8 +1,8 @@
 package com.access;
 
-import com.entity.UserType;
+import com.entity.UserTypeEntity;
 import org.springframework.data.jpa.repository.JpaRepository;
 
-public interface UserTypeDao extends JpaRepository<UserType, Integer> {
+public interface UserTypeDao extends JpaRepository<UserTypeEntity, Integer> {
 
 }

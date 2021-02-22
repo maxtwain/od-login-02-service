@@ -1,6 +1,6 @@
 package com.entity;
 
-import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.obj.UserType;
 import lombok.*;
 
 import javax.persistence.*;
@@ -8,26 +8,25 @@ import java.util.Set;
 
 @Getter
 @Setter
-@ToString
 @Entity
 @NoArgsConstructor
 @AllArgsConstructor
 @Table(name = "user_type")
-public class UserType {
+public class UserTypeEntity {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     @Column(name = "user_type_id")
     @Setter(AccessLevel.NONE)
-    private int userTypeId;
+    private Integer userTypeId;
 
     @Column(name = "user_type")
     private String userType;
 
-    @OneToMany(mappedBy = "userType")
-    @JsonBackReference
-    private Set<User> users;
+    @OneToMany(mappedBy = "userTypeEntity")
+    private Set<UserEntity> userEntities;
 
-    public UserType(String userType) {
-        this.userType = userType;
+    public UserTypeEntity(UserType userType){
+        userTypeId = userType.getUserTypeId();
+        this.userType = userType.getUserType();
     }
 }

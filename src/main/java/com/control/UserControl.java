@@ -1,7 +1,6 @@
 package com.control;
 
-import com.entity.Address;
-import com.entity.User;
+import com.obj.User;
 import com.service.UserService;
 import lombok.AllArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -11,7 +10,6 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import java.util.ArrayList;
 import java.util.List;
 
 @RestController
@@ -27,15 +25,7 @@ public class UserControl {
     }
     @GetMapping("street")
     public ResponseEntity<String> getStreetAddress(){
-        System.out.println("mark 01");
-        User user = userService.getOne();
-        System.out.println("mark 02:");
-        List<Address> addresses = new ArrayList<>(user.getAddresses());
-        System.out.println("mark 03");
-        Address address = addresses.get(0);
-        System.out.println("mark 04");
-        String street = address.getStreetAddress();
-        System.out.println("mark 05");
+        String street = userService.getOneAddress();
         return new ResponseEntity<>(street, HttpStatus.OK);
     }
 
