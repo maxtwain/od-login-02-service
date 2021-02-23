@@ -15,7 +15,6 @@ public class CredentialEntity {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     @Column(name = "credential_id")
-    @Setter(AccessLevel.NONE)
     private Integer credentialId;
 
     @Column(name = "username")

@@ -16,7 +16,6 @@ public class UserTypeEntity {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     @Column(name = "user_type_id")
-    @Setter(AccessLevel.NONE)
     private Integer userTypeId;
 
     @Column(name = "user_type")

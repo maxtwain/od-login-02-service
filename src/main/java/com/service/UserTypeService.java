@@ -17,7 +17,17 @@ public class UserTypeService {
 
     public void save(UserType userType){
         UserTypeEntity userTypeEntity = new UserTypeEntity(userType);
-        userTypeDao.save(userTypeEntity);
+        String userTypeStr = userTypeEntity.getUserType();
+        if (!userTypeDao.existsByUserType(userTypeStr)){
+            userTypeDao.save(userTypeEntity);
+        }
+    }
+
+    UserTypeEntity syncUserType(UserTypeEntity userTypeEntity){
+        if (userTypeDao.existsByUserType(userTypeEntity.getUserType())){
+            return userTypeDao.findByUserType(userTypeEntity.getUserType());
+        }
+        return userTypeEntity;
     }
 
 }

@@ -6,9 +6,7 @@ import lombok.AllArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
@@ -23,10 +21,20 @@ public class UserControl {
         List<User> users = userService.findAll();
         return new ResponseEntity<>(users, HttpStatus.OK);
     }
+    @GetMapping("{userId}")
+    public ResponseEntity<User> findByUserId(@PathVariable int userId){
+        User user = userService.findByUserId(userId);
+        return new ResponseEntity<>(user, HttpStatus.OK);
+    }
     @GetMapping("street")
     public ResponseEntity<String> getStreetAddress(){
         String street = userService.getOneAddress();
         return new ResponseEntity<>(street, HttpStatus.OK);
+    }
+    @DeleteMapping("{userId}")
+    public ResponseEntity<String> deleteUserByUserId(@PathVariable int userId){
+        userService.deleteByUserId(userId);
+        return new ResponseEntity<>(HttpStatus.OK);
     }
 
 }
