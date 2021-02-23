@@ -16,7 +16,6 @@ public class AddressEntity {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     @Column(name = "address_id")
-    @Setter(AccessLevel.NONE)
     private Integer addressId;
 
     @Column(name = "street_address")
@@ -31,7 +30,7 @@ public class AddressEntity {
     @Column(name = "state_address")
     private String stateAddress;
 
-    @ManyToMany(cascade = CascadeType.ALL, mappedBy = "addressEntities")
+    @ManyToMany(cascade = CascadeType.PERSIST, mappedBy = "addressEntities")
     private Set<UserEntity> userEntities;
 
     public AddressEntity(Address address){

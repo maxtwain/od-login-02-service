@@ -17,7 +17,18 @@ public class CredentialService {
 
     public void save(Credential credential){
         CredentialEntity credentialEntity = new CredentialEntity(credential);
-        credentialDao.save(credentialEntity);
+        if (!credentialDao.existsByUsername(credential.getUsername())){
+            credentialDao.save(credentialEntity);
+        }
     }
-
+    /** warning: This can create a many to one relationship if not used correctly.
+     * @param credentialEntity with no id
+     * @return credentialEntity with database id */
+    CredentialEntity syncCredential(CredentialEntity credentialEntity){
+        if (credentialDao.existsByUsername(credentialEntity.getUsername())){
+            return credentialDao.getCredentialEntityByUsername(
+                    credentialEntity.getUsername());
+        }
+        return credentialEntity;
+    }
 }
